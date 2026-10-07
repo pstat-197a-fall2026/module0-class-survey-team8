@@ -24,3 +24,6 @@ Remarks:
 -   you will be evaluated in part on your individual contributions based on the commit history of your group's repository, so **make sure your contributions are recorded in the commit history somehow**; your commits may pertain to scripts or the write-up and may be on the main branch or a separate branch;
 
 -   consider using the *Issues* feature to assign tasks and track work
+
+Team Members
+- Stacy Callahan
