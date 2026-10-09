@@ -30,3 +30,4 @@ Team Members
 - Adrian Filip
 - Hannah Nguyen
 - James Liang
+- Laiyee Ke
