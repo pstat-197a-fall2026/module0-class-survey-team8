@@ -1,9 +1,22 @@
 # Findings (language preference vs domains / comfort ratings, n = 49)
-# - Python is the top answer in most domains, but it is 45% of the class, so no clear domain pattern
-# - Comfort ratings (prog, math, stat) did not differ by language (all p > 0.2)
-# - No preference people checked more domains (Kruskal-Wallis p = 0.012)
-#   No pref vs R: adj p = 0.017, No pref vs Python: adj p = 0.049 (borderline), Python vs R: p = 0.41
-# - Small sample, so treat these as trends
+# Sample: 22 Python, 16 no preference, 11 R. Groups are unbalanced, R is the smallest.
+# Cleaning: dropped 7 domains that only 1 person picked (8 domains kept). All 11 types of work kept.
+#
+# 1. Domain picks vs language: Python is the top answer in most domains, but it is 45% of the class,
+#    so that alone is not a pattern. No domain clearly separated the groups.
+#
+# 2. Comfort ratings (1-5) vs language: Python people rated themselves slightly higher.
+#    Averages (Python / R / No pref): prog 3.86 / 3.55 / 3.56, math 4.18 / 4.00 / 3.69, stat 4.27 / 4.27 / 3.88
+#    Not significant (Kruskal-Wallis: prog p = 0.42, math p = 0.19, stat p = 0.22), so these are
+#    possible trends that need a bigger sample.
+#
+# 3. Number of boxes checked vs language: no preference people checked more.
+#    Domains: 5.06 (No pref) vs 3.68 (Python) vs 3.27 (R), Kruskal-Wallis p = 0.012
+#      No pref vs R: adj p = 0.017, No pref vs Python: adj p = 0.049 (borderline), Python vs R: p = 0.41
+#    Total (domains + types of work): 12.4 vs 10.1 vs 9.73, p = 0.047 (borderline, side note)
+#    Possible reason: broader interests or less experience, but the data cannot say why.
+#
+# Limits: small sample, small R group, self-reported answers, one class, several tests run.
 
 library(tidyverse)
 
