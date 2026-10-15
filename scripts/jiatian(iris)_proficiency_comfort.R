@@ -1,5 +1,5 @@
 # load data
-data <- read.csv("background_interest_processed.csv")
+data <- read.csv("data/background_interest_processed.csv")
 
 # transform proficiency levels (beg/int/adv) into numbers 1, 2, 3
 to_num <- function(x) ifelse(x == "beg", 1, ifelse(x == "int", 2, 3))
