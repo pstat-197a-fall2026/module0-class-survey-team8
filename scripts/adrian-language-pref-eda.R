@@ -18,6 +18,17 @@
 #
 # Limits: small sample, small R group, self-reported answers, one class, several tests run.
 
+# Here's code for making the table of language vs comfortabilties (for report):
+###
+# processed %>%
+#   group_by(language) %>%
+#   summarize(People = n(),
+#             Programming = round(mean(prog.comf), 2),
+#             Math = round(mean(math.comf), 2),
+#             Stats = round(mean(stat.comf), 2)) %>%
+#   knitr::kable(caption = "Average comfort rating (1 to 5) by language preference")
+###
+
 library(tidyverse)
 
 processed <- read_csv("data/background_interest_processed.csv")
