@@ -42,7 +42,7 @@ The class is mostly seniors (49 of 55, 89%), with 5 juniors and 1 junior with se
 We also used outside data from the 2025-26 UCSB campus profile (budgetandplanning.ucsb.edu), which reports raw counts of students by gender and ethnicity. It covers 21,509 undergraduates school-wide and 1,693 undergraduates in the Data Science major. We used these counts as a reference to test whether the gender and ethnicity makeup of our class differs from the major and from the school as a whole.
 
 | Section | Measurements |
-|------------------------------------|------------------------------------|
+|----|----|
 | Background (51 people) | Self-rated proficiency in programming, math, and stats (beginner, intermediate, advanced, relative to a typical UCSB undergrad) |
 |  | Comfort level in each of those three areas (1 to 5 scale) |
 |  | Number of upper-division courses (3-5, 6-8, 9+) and which courses they completed |
