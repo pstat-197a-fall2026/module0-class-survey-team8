@@ -117,17 +117,17 @@ pairwise.wilcox.test(processed$n_domains, processed$language, exact = FALSE)
 # proficiency vs comfort in coding
 # transform proficiency levels (beg/int/adv) into numbers 1, 2, 3
 to_num <- function(x) ifelse(x == "beg", 1, ifelse(x == "int", 2, 3))
-data$prog.p <- to_num(data$prog.prof)
+processed$prog.p <- to_num(processed$prog.prof)
 
 # average gap between proficiency and comfort
 # gap > 0: more comfortable than their stated proficiency (overestimate)
 # gap < 0: less comfortable than their stated proficiency (underestimate)
-data$prog.gap <- (data$prog.comf - 1) / 4 - (data$prog.p - 1) / 2
-mean(data$prog.gap)
+processed$prog.gap <- (processed$prog.comf - 1) / 4 - (processed$prog.p - 1) / 2
+mean(processed$prog.gap)
 
 # count students who over/under-estimate by language
-data$label <- cut(data$prog.gap, c(-Inf, -0.25, 0.25, Inf), labels = c("Under", "Aligned", "Over"))
-counts <- table(data$language, data$label)
+processed$label <- cut(processed$prog.gap, c(-Inf, -0.25, 0.25, Inf), labels = c("Under", "Aligned", "Over"))
+counts <- table(processed$language, processed$label)
 counts
 round(prop.table(counts, margin = 2), 2)
 
