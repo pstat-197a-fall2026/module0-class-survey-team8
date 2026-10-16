@@ -66,7 +66,7 @@ Summarize your results. Don't try to explain every step you took; focus instead 
 
 adrian added:
 
-### How does a student's preferences/experience impact their project choices?
+### 1. How does a student's preferences/experience impact their project choices?
 
 One thing we did is we looked at whether a student's preferred programming language (Python, R, or no preference) relates to their domain interests and self-rated comfort. We used the 49 students who answered both survey sections (22 Python, 16 no preference, 11 R) and left out the 7 domains that only one student picked.
 
