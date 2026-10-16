@@ -34,7 +34,7 @@ class_gen <- read_csv('demographics/Sheet 6-class gender.csv')
 
 Write a one-paragraph abstract summarizing what you did and your findings. It need not be comprehensive; try to highlight the most important or interesting outcomes.
 
-Our group was interested in analyzing how students' recorded experiences and interests relate to their project choices and language preferences. We were interested in comparing the demographic information from the survey to the general Statistics and Data Science major and undergraduate university level. Our final analysis asked whether the distribution of survey response times were significant, and if there was possible association with class days. We found that the correlation between project preference and coursework taken was insignificant, and that differences in Python or R preference was not significantly explained by domain or area interests. However, students with no coding language preference picked more domain interests on average, with those of no language preference selecting 5 options, while Python chose 3.7, and R 3.3. The demographic analysis revealed significant differences in ethnic composition of class respondents compared with the major and undergraduate student population, although gender was insignificant. \*add results from response time here as well
+Our group was interested in analyzing how students' recorded experiences and interests relate to their project choices and language preferences. We were interested in comparing the demographic information from the survey to the general Statistics and Data Science major and undergraduate university level. Our final analysis asked whether the distribution of survey response times were significant, and if there was possible association with class days. We found that the correlation between project preference and coursework taken was insignificant, and that differences in Python or R preference was not significantly explained by domain or area interests. However, students with no coding language preference picked more domain interests on average, with those of no language preference selecting 5 options, while Python chose 3.7, and R 3.3. The demographic analysis revealed significant differences in ethnic composition of class respondents compared with the major and undergraduate student population, although gender was insignificant. Another thing we looked at was the survey response timing. In particular, we were interested in whether there was a significant difference between responses completed on class days versus non class days. To test this, we performed a permutation test. Since our hypothesis was formed from looking at the data, we cannot conclude the test based on a significance level, but the results suggest class days may have been associated with more surveys completed.
 
 ## Data description
 
@@ -47,6 +47,8 @@ The data come from a survey given to students in our class (PSTAT 197A) in fall 
 The class is mostly seniors (49 of 55, 89%), with 5 juniors and 1 junior with senior credits. Nearly everyone is a Statistics and Data Science major (52 of 55, 95%), and about a third report a second major (Economics, Mathematics, and Applied Mathematics are the most common). The class is 55% male and 42% female, and 67% identify as Asian.
 
 We also used outside data from the 2025-26 UCSB campus profile (bap.ucsb.edu), which reports raw counts of students by gender and ethnicity. It covers 21,509 undergraduates school-wide and 1,693 undergraduates in the Data Science major. We used these counts as a reference to test whether the gender and ethnicity makeup of our class differs from the major and from the school as a whole.
+
+Finally, there was data on how many students completed the survey each day for the 2 weeks between assignment and deadline.
 
 +---------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
 | Background                      | Measurements                                                                                                                    |
@@ -82,7 +84,7 @@ Through our group's collaboration, we were interested in identifying a relations
 
 1.  How does a student's preferences/experience impact their project choices?
 2.  How does our class demographic data compare to the school and the data science major as a whole?
-3.  Is there significance in the distribution of the class response times? *Stacy edit question here*
+3.  Is there a significant difference in surveys completed on class vs non class days?
 
 ## Findings
 
@@ -281,6 +283,21 @@ summary_table %>%
 ```
 
 The results indicated statistically significant differences in ethnicity between our class and both the overall UCSB undergraduate population and the department's undergraduate population at the 95% confidence level (p-values of \<0.001 and 0.0248). However, the differences in gender distributions were not statistically significant for either comparison. These findings suggest that while the ethnic composition of our class differs from that of the broader student populations, its gender composition does not show sufficient evidence of a difference.
+
+### 3. Is there a significant difference in surveys completed on class vs non class days?
+
+As you can see in the chart below, the class days were 9/24, 9/29, and 10/1. ![Bar chart of number of surveys completed each day, colored by class vs non class day](response_timing_bar_chart_class_day_color.png)
+
+To test whether there was a significant difference in surveys completed on class vs non class days we performed a permutation test.
+
+- Null hypothesis: number of surveys completed on a given day is independent of whether the day is a class day - Alternative hypothesis: the day being a class day is positively associated with number of surveys completed
+- Test statistic: mean completion on class days - mean completion on non-class days
+- Null distribution: test statistic computed for every possible assignment of the 3 class-day labels to the 13 days (13 choose 3)
+- P-value: how often is this test-statistic larger than or equal to the observed result
+
+![Histogram of test statistic permutation null distribution + observed test statistic and p-value](response_timing_permutation_null_distribution.png)
+
+As you can see the p-value is quite low, suggesting there is a positive association between survey completed and being a class day. However, since our hypothesis was formed from looking at the data, this p-value likely overstates the significance of the results and cannot be used to conclusively decide the hypothesis test.
 
 ## Useful tips (remove this section)
 

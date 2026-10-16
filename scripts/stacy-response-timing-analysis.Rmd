@@ -17,14 +17,17 @@ Removing the year part of the date
 
 ```{r}
 response_timing_data <- response_timing_data %>% 
-  mutate(date = str_sub(date, start = 6, end = 10))
+  mutate(date = str_sub(date, start = 6, end = 10)) %>%
+  mutate(class_day = date %in% c("09-24", "09-29", "10-01"))
 ```
 
 Now let's plot this data
 
 ```{r}
-ggplot(response_timing_data, aes(x = date, y = n)) + 
+ggplot(response_timing_data, aes(x = date, y = n, fill = class_day)) + 
   geom_col()
+
+ggsave("../results/response_timing_bar_chart_class_day_color.png", width = 6, height = 4, units = "in", dpi = 300)
 ```
 
 # Analysis: Class Day vs. Non-Class Day Hypothesis Test
@@ -40,10 +43,6 @@ Looking at the data we hypothesize 9/24 and 9/29 are the spikes because they wer
 *Since we formed the hypothesis by looking at the data, the reported p-value will likely overstate the significance of the results. Thus, we will not set a significance level and make a reject/fail to reject decision based on the reported p-value. We are simply performing this test as an exploratory, descriptive analysis. Further, since this analysis is non-experimental, it can only suggest correlation, not causation.*
 
 ```{r}
-# Add class day label to the data
-response_timing_data <- response_timing_data |>
-  mutate(class_day = date %in% c("09-24", "09-29", "10-01"))
-
 y <- response_timing_data$n
 is_class <- response_timing_data$class_day
 
@@ -62,8 +61,8 @@ ggplot(tibble(diff = null_dist), aes(diff)) +
      y = "Count") + 
   annotate("text", x = observed_test_statistic, y = Inf,
          label = paste("Observed =", round(observed_test_statistic, 2)),
-         vjust = 1.5, hjust = -0.1, color = "red")
+         vjust = 1.5, hjust = -0.1, color = "red") +
+  annotate("text", x =8, y = 5, label = paste("P-value =", round(mean(null_dist >= observed_test_statistic), 2)), color = "black")
 
-cat("Observed test statistic:", observed_test_statistic, "\n")
-cat("P-value:", mean(null_dist >= observed_test_statistic), "\n")
+ggsave("../results/response_timing_permutation_null_distribution.png", width = 6, height = 4, units = "in", dpi = 300)
 ```
