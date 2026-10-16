@@ -29,6 +29,25 @@ Write a one-paragraph abstract summarizing what you did and your findings. It ne
 
 Write a brief description of the dataset. Your description should cover how data were obtained, sample characteristics, and measurements taken. It does not need to be exhaustive, but sufficiently detailed to convey a clear high-level understanding of the dataset. You can utilize bullet points or tables if you feel it would help improve clarity.
 
+here it is:
+
+The data come from a survey given to students in our class (PSTAT 197A) in fall 2026. There were 55 responses, submitted between September 23 and October 5, with a deadline of October 4 (54 on time, 1 late). The survey had two parts, a skills and background section and a project interests section, and students could consent to each part separately. 51 consented to the background part, 49 to the interests part, and 49 to both. Our analysis uses the 49 who did both, since the 2 who only did the background part drop out when the two files are merged. Each respondent has an artificial ID, so the two parts can be joined without identifying anyone.
+
+The class is mostly seniors (49 of 55, 89%), with 5 juniors and 1 junior with senior credits. Nearly everyone is a Statistics and Data Science major (52 of 55, 95%), and about a third report a second major (Economics, Mathematics, and Applied Mathematics are the most common). The class is 55% male and 42% female, and 67% identify as Asian.
+
+We also used outside data from the 2025-26 UCSB campus profile (budgetandplanning.ucsb.edu), which reports raw counts of students by gender and ethnicity. It covers 21,509 undergraduates school-wide and 1,693 undergraduates in the Data Science major. We used these counts as a reference to test whether the gender and ethnicity makeup of our class differs from the major and from the school as a whole.
+
+| Section | Measurements |
+|------------------------------------|------------------------------------|
+| Background (51 people) | Self-rated proficiency in programming, math, and stats (beginner, intermediate, advanced, relative to a typical UCSB undergrad) |
+|  | Comfort level in each of those three areas (1 to 5 scale) |
+|  | Number of upper-division courses (3-5, 6-8, 9+) and which courses they completed |
+|  | Whether they have a domain specialization, and whether they have research experience (yes, no, unsure) |
+| Project interests (49 people) | Preferred project type: industry (32), research lab (6), no preference (11) |
+|  | Preferred programming language: Python (22), no preference (16), R (11) |
+|  | Application domains of interest (checkbox question, 8 standard options plus a few write-ins) |
+|  | Areas of data science of interest (checkbox question, 11 options) |
+
 ## Questions of interest
 
 Indicate the questions your analysis addresses. These should map one-to-one to your findings. Don't include questions you didn't answer or questions you started with and refined later. If you would rather frame them as goals or tasks rather than questions that is okay; just modify the header appropriately. However you frame what you've done, you may only have two or three items; that is fine. Provide an itemized or numbered list so that the reader can easily identify your objectives.
