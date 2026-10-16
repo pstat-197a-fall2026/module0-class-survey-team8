@@ -15,8 +15,6 @@ execute:
 tbl-colwidths: [30, 70]
 ---
 
-Use this as a template. Keep the headers and remove all other text. Overall, your report may be quite short. When it is complete, render and then push changes to your team repository.
-
 ```{r, include = FALSE}
 # load any other packages and read data here
 library(tidyverse)
@@ -32,15 +30,9 @@ class_gen <- read_csv('demographics/Sheet 6-class gender.csv')
 
 ## Executive summary
 
-Write a one-paragraph abstract summarizing what you did and your findings. It need not be comprehensive; try to highlight the most important or interesting outcomes.
-
-Our group was interested in analyzing how students' recorded experiences and interests relate to their project choices and language preferences. We were interested in comparing the demographic information from the survey to the general Statistics and Data Science major and undergraduate university level. Our final analysis asked whether the distribution of survey response times were significant, and if there was possible association with class days. We found that the correlation between project preference and coursework taken was insignificant, and that differences in Python or R preference was not significantly explained by domain or area interests. However, students with no coding language preference picked more domain interests on average, with those of no language preference selecting 5 options, while Python chose 3.7, and R 3.3. The demographic analysis revealed significant differences in ethnic composition of class respondents compared with the major and undergraduate student population, although gender was insignificant. Another thing we looked at was the survey response timing. In particular, we were interested in whether there was a significant difference between responses completed on class days versus non class days. To test this, we performed a permutation test. Since our hypothesis was formed from looking at the data, we cannot conclude the test based on a significance level, but the results suggest class days may have been associated with more surveys completed.
+Our group was interested in analyzing how students' recorded experiences and interests relate to their project choices and language preferences. We were interested in comparing the demographic information from the survey to the general Statistics and Data Science major and undergraduate university level. Our final analysis asked whether the distribution of survey response times was significant, and if there was a possible association with class days. We found that the correlation between project preference and coursework taken was insignificant, and that differences in Python or R preference was not significantly explained by domain or area interests. However, students with no coding language preference picked more domain interests on average, with those of no language preference selecting 5 options, while Python chose 3.7, and R 3.3. The demographic analysis revealed significant differences in ethnic composition of class respondents compared with the major and undergraduate student population, although gender was insignificant. Another thing we looked at was the survey response timing. In particular, we were interested in whether there was a significant difference between responses completed on class days versus non class days. To test this, we performed a permutation test. Since our hypothesis was formed from looking at the data, we cannot conclude the test based on a significance level, but the results suggest class days may have been associated with more surveys completed.
 
 ## Data description
-
-Write a brief description of the dataset. Your description should cover how data were obtained, sample characteristics, and measurements taken. It does not need to be exhaustive, but sufficiently detailed to convey a clear high-level understanding of the dataset. You can utilize bullet points or tables if you feel it would help improve clarity.
-
-here it is:
 
 The data come from a survey given to students in our class (PSTAT 197A) in fall 2026. There were 55 responses, submitted between September 23 and October 5, with a deadline of October 4 (54 on time, 1 late). The survey had two parts, a skills and background section and a project interests section, and students could consent to each part separately. 51 consented to the background part, 49 to the interests part, and 49 to both. Our analysis uses the 49 who did both, since the 2 who only did the background part drop out when the two files are merged. Each respondent has an artificial ID, so the two parts can be joined without identifying anyone.
 
@@ -88,11 +80,7 @@ Through our group's collaboration, we were interested in identifying a relations
 
 ## Findings
 
-Summarize your results. Don't try to explain every step you took; focus instead on providing the main data analytic outputs -- tables and figures -- and explaining clearly what they show. Clarify any important decisions you made in obtaining them. You can display codes if you like but it is not necessary.
-
 ### 1. How does a student's preferences/experience impact their project choices?
-
-adrian added:
 
 One thing we did is we looked at whether a student's preferred programming language (Python, R, or no preference) relates to their domain interests and self-rated comfort. We used the 49 students who answered both survey sections (22 Python, 16 no preference, 11 R) and left out the 7 domains that only one student picked.
 
@@ -159,20 +147,19 @@ Proficiency is the skill level students stated they have: beginner, intermediate
 ```{r}
 to_num <- function(x) ifelse(x == "beg", 1, ifelse(x == "int", 2, 3))
 processed$prog.p <- to_num(processed$prog.prof)
-processed$label <- cut(processed$prog.gap, c(-Inf, -0.25, 0.25, Inf), labels = c("Under", "Aligned", "Over"))
-counts <- table(processed$language, processed$label)
+processed$prog.gap <- (processed$prog.comf - 1) / 4 - (processed$prog.p - 1) / 2
+label <- function(gap) ifelse(gap > 0.25, "Over", ifelse(gap < -0.25, "Under", "Aligned"))
+counts <- table(processed$language, label(processed$prog.gap))
 counts
 ```
 
-Of the 49 students, most students' stated proficiency were aligned with their comfort in coding. 12 students under-estimated (less comfortable than their proficiency suggests) and only 5 over-estimated.
+Of all students, most students' stated proficiency were aligned with their comfort in coding. Only 1 students under-estimated (less comfortable than their proficiency suggests) and 5 over-estimated.
 
 ```{r}
 round(prop.table(counts, margin = 2), 2)
 ```
 
-This table shows the percentage of students in the underestimate, aligned, and overestimate categories, based on which language they prefer. From the table, Python made up the largest share (42%) in the underestimate category, and students with no preferences made up most of the overestimate group (60%).
-
-hannah added:
+This table shows the percentage of students in the underestimate, aligned, and overestimate categories, based on which language they prefer. From the table, students who prefer using R made up the 1% share of the underestimate category, and students with no preferences made up most of the overestimate group (60%).
 
 We also looked at whether taking a particular class had a significant influence on which project choices you picked. A heatmap was created to showcase the correlations between the classes taken and projects picked, where blue indicated a positive correlation, while red was a negative correlation.
 
@@ -208,7 +195,7 @@ rownames(top) <- NULL
 top
 ```
 
-Laiyee:
+### 2. How does our class demographic data compare to the school and the data science major as a whole?
 
 Additionally, we utilized ethnicity and gender data to compare the demographic composition of our class with that of the overall UCSB undergraduate population and undergraduate students in the Statistics and Probability department. We obtained ethnicity data (White/Other, Asian, and URM) and gender data (Man/Trans Man, Woman/Trans Woman, and Other/Unknown) from the UCSB Office of Budget and Planning enrollment dashboard. One limitation of the data set was that international students did not have their ethnicity or country of origin specified, so we excluded these students from our ethnicity comparisons. The counts were compiled into separate CSV files and analyzed using Pearson's chi-square test to determine whether the observed differences in demographic distributions were statistically significant.
 
