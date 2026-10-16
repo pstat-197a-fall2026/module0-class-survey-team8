@@ -1,7 +1,7 @@
 ---
 title: "Analysis of class surveys"
-subtitle: "If you want a subtitle put it here"
-author: "List names here"
+subtitle: "Group 8"
+author: "Stacy Callahan, Adrian Filip, Hannah Nguyen, James Liang, Laiyee Ke, Jiatian (Iris) Li"
 date: last-modified
 published-title: "Updated"
 editor: visual
@@ -23,11 +23,15 @@ library(tidyverse)
 
 ## Executive summary
 
-Write a one-paragraph abstract summarizing what you did and your findings. It need not be comprehensive; try to highlight the most important or interesting outcomes.
+How does a student's preferences/experience impact their project choices?
+
+How does our class demographic data compare to the school and the data science major as a whole?
+
+*Stacy add question here*
 
 ## Data description
 
-Write a brief description of the dataset. Your description should cover how data were obtained, sample characteristics, and measurements taken. It does not need to be exhaustive, but sufficiently detailed to convey a clear high-level understanding of the dataset. You can utilize bullet points or tables if you feel it would help improve clarity.
+Write a brief description of the dataset. Your description should cover how data were obtained, sample characteristics, and measurements taken. It does not need to be exhaustive, but sufficiently detailed to convey a clear high-level understanding of the dataset. You can utilize bullet points or tables if you feel it would help improve clarity.s
 
 here it is:
 
