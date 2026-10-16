@@ -112,3 +112,70 @@ kruskal.test(n_picks ~ language, data = processed)
 # which groups differ on domains checked?
 # No pref vs R: 0.017, No pref vs Python: 0.049 (weaker), Python vs R: 0.405
 pairwise.wilcox.test(processed$n_domains, processed$language, exact = FALSE)
+
+
+# proficiency vs comfort in coding
+# transform proficiency levels (beg/int/adv) into numbers 1, 2, 3
+to_num <- function(x) ifelse(x == "beg", 1, ifelse(x == "int", 2, 3))
+processed$prog.p <- to_num(processed$prog.prof)
+
+# average gap between proficiency and comfort
+# gap > 0: more comfortable than their stated proficiency (overestimate)
+# gap < 0: less comfortable than their stated proficiency (underestimate)
+processed$prog.gap <- (processed$prog.comf - 1) / 4 - (processed$prog.p - 1) / 2
+mean(processed$prog.gap)
+
+# count students who over/under-estimate by language
+processed$label <- cut(processed$prog.gap, c(-Inf, -0.25, 0.25, Inf), labels = c("Under", "Aligned", "Over"))
+counts <- table(processed$language, processed$label)
+counts
+round(prop.table(counts, margin = 2), 2)
+
+
+
+### Courses taken vs. Project Preference
+
+head(processed)
+dim(processed)
+glimpse(processed)
+
+# Take columns
+proj_interest <- processed[, 31:56]
+glimpse(proj_interest)
+
+classes_taken <- processed[, 13:30]
+glimpse(classes_taken)
+
+# Correlation heat map
+cross <- cor(proj_interest, classes_taken, use = "pairwise.complete.obs")
+dim(cross)
+
+# Plot it
+cross_f <- cross
+cross_f[abs(cross_f) < 0.1] <- 0     # adjust the threshold
+corrplot(cross_f, method = "color", is.corr = TRUE, number.cex = 0.6, tl.cex = 0.8)
+
+# Barplots of number of each project interested in or class taken
+barplot(sort(colSums(proj_interest), decreasing = TRUE), las = 2, cex.names = 0.7)
+barplot(sort(colSums(classes_taken), decreasing = TRUE), las = 2, cex.names = 0.7)
+
+table(rowSums(proj_interest))
+table(rowSums(classes_taken))
+
+# stats test
+cross <- cor(proj_interest, classes_taken, use = "pairwise.complete.obs")
+obs <- sum(cross^2, na.rm = TRUE)
+
+set.seed(1)
+B <- 5000
+perm <- replicate(B, {
+  shuf <- classes_taken[sample(nrow(classes_taken)), ]
+  sum(cor(proj_interest, shuf, use = "pairwise.complete.obs")^2, na.rm = TRUE)
+})
+
+(sum(perm >= obs) + 1) / (B + 1)   # p-value
+hist(perm); abline(v = obs, col = "red")
+
+# p-value: 0.3537293 
+
+

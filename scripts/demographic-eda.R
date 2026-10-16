@@ -55,3 +55,14 @@ for (comparison in names(demographic_tests)) {
   print(demographic_tests[[comparison]]$counts)
   print(demographic_tests[[comparison]]$test)
 }
+
+summary_table %>%
+  mutate(
+    `Chi-square` = round(`Chi-square`, 2),
+    `p-value` = format.pval(`p-value`, digits = 3, eps = 0.001)
+  ) %>%
+  knitr::kable(
+    caption = "Demographic comparison of class enrollment with school and DS populations",
+    align = c('l','l', 'r', 'r', 'c')
+  )
+
