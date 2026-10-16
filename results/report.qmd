@@ -126,6 +126,24 @@ map_dfr(vars, function(v) {
 
 Only the number of domains picked is significant. The comfort differences may be real trends, but with 49 students from one class (and several tests run), we cannot tell them apart from chance.
 
+Proficiency is the skill level students stated they have: beginner, intermediate, or advanced compared to an average UCSB student, and comfort is how students feel when coding, rated on a scale from 1 to 5.
+
+```{r}
+to_num <- function(x) ifelse(x == "beg", 1, ifelse(x == "int", 2, 3))
+processed$prog.p <- to_num(processed$prog.prof)
+processed$label <- cut(processed$prog.gap, c(-Inf, -0.25, 0.25, Inf), labels = c("Under", "Aligned", "Over"))
+counts <- table(processed$language, processed$label)
+counts
+```
+
+Of the 49 students, most students' stated proficiency were aligned with their comfort in coding. 12 students under-estimated (less comfortable than their proficiency suggests) and only 5 over-estimated.
+
+```{r}
+round(prop.table(counts, margin = 2), 2)
+```
+
+This table shows the percentage of students in the underestimate, aligned, and overestimate categories, based on which language they prefer. From the table, Python made up the largest share (42%) in the underestimate category, and students with no preferences made up most of the overestimate group (60%).
+
 ## Useful tips (remove this section)
 
 Due to the visual editor, most common needs for authoring can be met using menu items in the RStudio IDE. For a comprehensive guide to Quarto, see the [documentation](https://quarto.org/docs/guide/); consult the documentation for anything you can't sort out in the IDE.
