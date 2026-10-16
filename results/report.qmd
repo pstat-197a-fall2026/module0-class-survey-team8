@@ -25,11 +25,9 @@ library(tidyverse)
 
 Write a one-paragraph abstract summarizing what you did and your findings. It need not be comprehensive; try to highlight the most important or interesting outcomes.
 
-Our group was interested in analyzing how a students' different preferences and experience was related to their project choices and decisions.
+Our group was interested in analyzing how students' recorded experiences and interests relate to their project choices and language preferences. We were interested in comparing the demographic information from the survey to the general Statistics and Data Science major and university level. Our final analysis asked whether the distribution of survey response times were significant, and if there was possible association with class days. We found that the correlation between project preference and coursework taken was insignificant, and that differences in Python or R preference was also not significantly explained by domain or area interests. However, we found that students with no coding language preference picked more domain interests on average, with those of no language preference selecting 5 options, while Python chose 3.7, and R 3.3.
 
-We found that students with no coding language preference picked more project domains, with those that have no language preference choosing 5 different options on average, and those choosing python: 3.7, R: 3.3
-
-Data description
+## Data description
 
 Write a brief description of the dataset. Your description should cover how data were obtained, sample characteristics, and measurements taken. It does not need to be exhaustive, but sufficiently detailed to convey a clear high-level understanding of the dataset. You can utilize bullet points or tables if you feel it would help improve clarity.s
 
@@ -42,7 +40,7 @@ The class is mostly seniors (49 of 55, 89%), with 5 juniors and 1 junior with se
 We also used outside data from the 2025-26 UCSB campus profile (bap.ucsb.edu), which reports raw counts of students by gender and ethnicity. It covers 21,509 undergraduates school-wide and 1,693 undergraduates in the Data Science major. We used these counts as a reference to test whether the gender and ethnicity makeup of our class differs from the major and from the school as a whole.
 
 | Section | Measurements |
-|----|----|
+|------------------------------------|------------------------------------|
 | Background (51 people) | Self-rated proficiency in programming, math, and stats (beginner, intermediate, advanced, relative to a typical UCSB undergrad) |
 |  | Comfort level in each of those three areas (1 to 5 scale) |
 |  | Number of upper-division courses (3-5, 6-8, 9+) and which courses they completed |
