@@ -5,17 +5,17 @@ library(ggplot2)
 library(corrplot)
 
 # Read and view dataset
-df <- read_csv("data/background_interest_processed.csv")
+processed <- read_csv("data/background_interest_processed.csv")
 
-head(df)
-dim(df)
-glimpse(df)
+head(processed)
+dim(processed)
+glimpse(processed)
 
 # Take columns
-proj_interest <- df[, 31:56]
+proj_interest <- processed[, 31:56]
 glimpse(proj_interest)
 
-classes_taken <- df[, 13:30]
+classes_taken <- processed[, 13:30]
 glimpse(classes_taken)
 
 # Correlation heat map
