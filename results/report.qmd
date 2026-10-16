@@ -17,9 +17,17 @@ tbl-colwidths: [30, 70]
 
 Use this as a template. Keep the headers and remove all other text. Overall, your report may be quite short. When it is complete, render and then push changes to your team repository.
 
-```{r}
+```{r, include = FALSE}
 # load any other packages and read data here
 library(tidyverse)
+library(knitr)
+school_eth <- read_csv('demographics/Sheet 3-school-wide ethnicity.csv')
+school_gen <- read_csv('demographics/Sheet 4-school-wide gender.csv')
+ds_eth <- read_csv('demographics/Sheet 1-ds ethnicity.csv')
+ds_gen <- read_csv('demographics/Sheet 2-ds gender.csv')
+class_eth <- read_csv('demographics/Sheet 5-class ethnicity.csv')
+class_gen <- read_csv('demographics/Sheet 6-class gender.csv')
+
 ```
 
 ## Executive summary
@@ -30,7 +38,7 @@ Our group was interested in analyzing how students' recorded experiences and int
 
 ## Data description
 
-Write a brief description of the dataset. Your description should cover how data were obtained, sample characteristics, and measurements taken. It does not need to be exhaustive, but sufficiently detailed to convey a clear high-level understanding of the dataset. You can utilize bullet points or tables if you feel it would help improve clarity.s
+Write a brief description of the dataset. Your description should cover how data were obtained, sample characteristics, and measurements taken. It does not need to be exhaustive, but sufficiently detailed to convey a clear high-level understanding of the dataset. You can utilize bullet points or tables if you feel it would help improve clarity.
 
 here it is:
 
@@ -197,6 +205,82 @@ top[, c("p", "p_adj")] <- round(top[, c("p", "p_adj")], 3)
 rownames(top) <- NULL
 top
 ```
+
+Laiyee:
+
+Additionally, we utilized ethnicity and gender data to compare the demographic composition of our class with that of the overall UCSB undergraduate population and undergraduate students in the Statistics and Probability department. We obtained ethnicity data (White/Other, Asian, and URM) and gender data (Man/Trans Man, Woman/Trans Woman, and Other/Unknown) from the UCSB Office of Budget and Planning enrollment dashboard. One limitation of the data set was that international students did not have their ethnicity or country of origin specified, so we excluded these students from our ethnicity comparisons. The counts were compiled into separate CSV files and analyzed using Pearson's chi-square test to determine whether the observed differences in demographic distributions were statistically significant.
+
+```{r}
+compare_class <- function(class_data, population_data, category) {
+  counts <- class_data %>%
+    select(all_of(category), Class = Count) %>%
+    full_join(
+      population_data %>% select(all_of(category), Population = Count),
+      by = category
+    )
+  
+  stopifnot(
+    !anyDuplicated(counts[[category]]),
+    !anyNA(counts),
+    all(counts$Class >= 0),
+    all(counts$Population >= counts$Class)
+  )
+  
+  contingency_table <- rbind(
+    Class = counts$Class,
+    Rest = counts$Population - counts$Class
+  )
+  colnames(contingency_table) <- counts[[category]]
+  stopifnot(all(rowSums(contingency_table) > 0),
+            all(colSums(contingency_table) > 0))
+  
+  # null hypothesis: category proportions are the same in the class and the rest of the population. 
+  # use Pearson chi-square p-value; small counts 
+  test <- suppressWarnings(chisq.test(contingency_table))
+  expected_counts <- test$expected
+  if (any(expected_counts < 5)) {
+    test <- chisq.test(contingency_table, simulate.p.value = TRUE, B = 100000)
+  }
+  
+  list(counts = contingency_table, expected = expected_counts, test = test)
+}
+
+set.seed(197)
+demographic_tests <- list(
+  class_vs_school_ethnicity = compare_class(class_eth, school_eth, 'Ethnicity'),
+  class_vs_ds_ethnicity = compare_class(class_eth, ds_eth, 'Ethnicity'),
+  class_vs_school_gender = compare_class(class_gen, school_gen, 'Gender'),
+  class_vs_ds_gender = compare_class(class_gen, ds_gen, 'Gender')
+)
+
+for (comparison in names(demographic_tests)) {
+  cat('\n', comparison, '\n')
+  print(demographic_tests[[comparison]]$counts)
+  print(demographic_tests[[comparison]]$test)
+}
+summary_table <- data.frame(
+  Comparison = names(demographic_tests),
+  `Chi-square` = sapply(demographic_tests, function(x) {
+    unname(x$test$statistic)
+  }),
+  `p-value` = sapply(demographic_tests, function(x) {
+    x$test$p.value
+  }),
+  check.names = FALSE
+)
+
+summary_table %>%
+  mutate(
+    `Chi-square` = round(`Chi-square`, 2),
+    `p-value` = format.pval(`p-value`, digits = 3, eps = 0.001)
+  ) %>%
+  knitr::kable(
+    caption = "Demographic comparison of class enrollment with school and DS populations",
+    align = c('l','l', 'r', 'r', 'c')
+  )
+```
+
+The results indicated statistically significant differences in ethnicity between our class and both the overall UCSB undergraduate population and the department's undergraduate population at the 95% confidence level (p-values of \<0.001 and 0.0248). However, the differences in gender distributions were not statistically significant for either comparison. These findings suggest that while the ethnic composition of our class differs from that of the broader student populations, its gender composition does not show sufficient evidence of a difference.
 
 ## Useful tips (remove this section)
 

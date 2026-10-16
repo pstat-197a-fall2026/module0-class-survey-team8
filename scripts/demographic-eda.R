@@ -1,11 +1,11 @@
 library(tidyverse)
 
-school_eth <- read_csv('data/demographics/Sheet 3-school-wide ethnicity.csv')
-school_gen <- read_csv('data/demographics/Sheet 4-school-wide gender.csv')
-ds_eth <- read_csv('data/demographics/Sheet 1-ds ethnicity.csv')
-ds_gen <- read_csv('data/demographics/Sheet 2-ds gender.csv')
-class_eth <- read_csv('data/demographics/Sheet 5-class ethnicity.csv')
-class_gen <- read_csv('data/demographics/Sheet 6-class gender.csv')
+school_eth <- read_csv('results/demographics/Sheet 3-school-wide ethnicity.csv')
+school_gen <- read_csv('results/demographics/Sheet 4-school-wide gender.csv')
+ds_eth <- read_csv('results/demographics/Sheet 1-ds ethnicity.csv')
+ds_gen <- read_csv('results/demographics/Sheet 2-ds gender.csv')
+class_eth <- read_csv('results/demographics/Sheet 5-class ethnicity.csv')
+class_gen <- read_csv('results/demographics/Sheet 6-class gender.csv')
 
 # class to pop
 compare_class <- function(class_data, population_data, category) {
@@ -55,6 +55,16 @@ for (comparison in names(demographic_tests)) {
   print(demographic_tests[[comparison]]$counts)
   print(demographic_tests[[comparison]]$test)
 }
+summary_table <- data.frame(
+  Comparison = names(demographic_tests),
+  `Chi-square` = sapply(demographic_tests, function(x) {
+    unname(x$test$statistic)
+  }),
+  `p-value` = sapply(demographic_tests, function(x) {
+    x$test$p.value
+  }),
+  check.names = FALSE
+)
 
 summary_table %>%
   mutate(
