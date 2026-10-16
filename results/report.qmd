@@ -64,9 +64,9 @@ Through our group's collaboration, we were interested in identifying a relations
 
 Summarize your results. Don't try to explain every step you took; focus instead on providing the main data analytic outputs -- tables and figures -- and explaining clearly what they show. Clarify any important decisions you made in obtaining them. You can display codes if you like but it is not necessary.
 
-adrian added:
-
 ### 1. How does a student's preferences/experience impact their project choices?
+
+adrian added:
 
 One thing we did is we looked at whether a student's preferred programming language (Python, R, or no preference) relates to their domain interests and self-rated comfort. We used the 49 students who answered both survey sections (22 Python, 16 no preference, 11 R) and left out the 7 domains that only one student picked.
 
