@@ -39,10 +39,10 @@ The data come from a survey given to students in our class (PSTAT 197A) in fall 
 
 The class is mostly seniors (49 of 55, 89%), with 5 juniors and 1 junior with senior credits. Nearly everyone is a Statistics and Data Science major (52 of 55, 95%), and about a third report a second major (Economics, Mathematics, and Applied Mathematics are the most common). The class is 55% male and 42% female, and 67% identify as Asian.
 
-We also used outside data from the 2025-26 UCSB campus profile (budgetandplanning.ucsb.edu), which reports raw counts of students by gender and ethnicity. It covers 21,509 undergraduates school-wide and 1,693 undergraduates in the Data Science major. We used these counts as a reference to test whether the gender and ethnicity makeup of our class differs from the major and from the school as a whole.
+We also used outside data from the 2025-26 UCSB campus profile (bap.ucsb.edu), which reports raw counts of students by gender and ethnicity. It covers 21,509 undergraduates school-wide and 1,693 undergraduates in the Data Science major. We used these counts as a reference to test whether the gender and ethnicity makeup of our class differs from the major and from the school as a whole.
 
 | Section | Measurements |
-|----|----|
+|------------------------------------|------------------------------------|
 | Background (51 people) | Self-rated proficiency in programming, math, and stats (beginner, intermediate, advanced, relative to a typical UCSB undergrad) |
 |  | Comfort level in each of those three areas (1 to 5 scale) |
 |  | Number of upper-division courses (3-5, 6-8, 9+) and which courses they completed |
@@ -54,17 +54,11 @@ We also used outside data from the 2025-26 UCSB campus profile (budgetandplannin
 
 ## Questions of interest
 
-Indicate the questions your analysis addresses. These should map one-to-one to your findings. Don't include questions you didn't answer or questions you started with and refined later. If you would rather frame them as goals or tasks rather than questions that is okay; just modify the header appropriately. However you frame what you've done, you may only have two or three items; that is fine. Provide an itemized or numbered list so that the reader can easily identify your objectives.
+Through our group's collaboration, we were interested in identifying a relationship between proficiency and comfort levels, and explored whether people overestimated or underestimated between these levels. Preference in coding languages was discussed, specifically if the interests in areas, domains, and average comfort influenced a respondent's choice of language. Likewise, the relationship among industry preference and coursework was analyzed. We wanted to find if there were significant differences between the demographic of our class cohort, and the overall major and university level. We attempted to understand the relationship among timings of the survey submission and class times. After exploring our class response's variables, we sought to explain three overarching goals:
 
-For example:
-
-> *We sought to understand the relationship between coursework preparation, self-assessed technical abilities, and comfort level with technical skills. We also sought to understand whether the relationships differed depending on having had prior research experience. Our analysis addressed three questions:*
->
-> 1.  *How should the coursework histories of students in the class be ordered from less preparation to extensive preparation?*
-> 2.  *Is coursework preparation associated with increased self-assessed technical skill and comfort within the sample?*
-> 3.  *Does prior research experience appear to be a substitute for coursework preparation with respect to self-assessed technical skill and comfort?*
-
-Notice that the questions are precise but not overly technical.
+1.  How does a student's preferences/experience impact their project choices?
+2.  How does our class demographic data compare to the school and the data science major as a whole?
+3.  Is there significance in the distribution of the class response times? *Stacy edit question here*
 
 ## Findings
 
