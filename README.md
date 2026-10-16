@@ -31,3 +31,4 @@ Team Members
 - Hannah Nguyen
 - James Liang
 - Laiyee Ke
+- Jiatian (Iris) Li
