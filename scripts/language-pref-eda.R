@@ -176,6 +176,4 @@ perm <- replicate(B, {
 (sum(perm >= obs) + 1) / (B + 1)   # p-value
 hist(perm); abline(v = obs, col = "red")
 
-# p-value: 0.3537293 
-
-
+# p-value: 0.3537293
