@@ -23,13 +23,13 @@ library(tidyverse)
 
 ## Executive summary
 
-How does a student's preferences/experience impact their project choices?
+Write a one-paragraph abstract summarizing what you did and your findings. It need not be comprehensive; try to highlight the most important or interesting outcomes.
 
-How does our class demographic data compare to the school and the data science major as a whole?
+Our group was interested in analyzing how a students' different preferences and experience was related to their project choices and decisions.
 
-*Stacy add question here*
+We found that students with no coding language preference picked more project domains, with those that have no language preference choosing 5 different options on average, and those choosing python: 3.7, R: 3.3
 
-## Data description
+Data description
 
 Write a brief description of the dataset. Your description should cover how data were obtained, sample characteristics, and measurements taken. It does not need to be exhaustive, but sufficiently detailed to convey a clear high-level understanding of the dataset. You can utilize bullet points or tables if you feel it would help improve clarity.s
 
