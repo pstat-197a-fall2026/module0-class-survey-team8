@@ -41,16 +41,16 @@ The class is mostly seniors (49 of 55, 89%), with 5 juniors and 1 junior with se
 
 We also used outside data from the 2025-26 UCSB campus profile (bap.ucsb.edu), which reports raw counts of students by gender and ethnicity. It covers 21,509 undergraduates school-wide and 1,693 undergraduates in the Data Science major. We used these counts as a reference to test whether the gender and ethnicity makeup of our class differs from the major and from the school as a whole.
 
-| Section | Measurements |
-|----|----|
-| Background (51 people) | Self-rated proficiency in programming, math, and stats (beginner, intermediate, advanced, relative to a typical UCSB undergrad) |
-|  | Comfort level in each of those three areas (1 to 5 scale) |
-|  | Number of upper-division courses (3-5, 6-8, 9+) and which courses they completed |
-|  | Whether they have a domain specialization, and whether they have research experience (yes, no, unsure) |
-| Project interests (49 people) | Preferred project type: industry (32), research lab (6), no preference (11) |
-|  | Preferred programming language: Python (22), no preference (16), R (11) |
-|  | Application domains of interest (checkbox question, 8 standard options plus a few write-ins) |
-|  | Areas of data science of interest (checkbox question, 11 options) |
+| Section                       | Measurements                                                                                                                    |
+|------------------------------------|------------------------------------|
+| Background (51 people)        | Self-rated proficiency in programming, math, and stats (beginner, intermediate, advanced, relative to a typical UCSB undergrad) |
+|                               | Comfort level in each of those three areas (1 to 5 scale)                                                                       |
+|                               | Number of upper-division courses (3-5, 6-8, 9+) and which courses they completed                                                |
+|                               | Whether they have a domain specialization, and whether they have research experience (yes, no, unsure)                          |
+| Project interests (49 people) | Preferred project type: industry (32), research lab (6), no preference (11)                                                     |
+|                               | Preferred programming language: Python (22), no preference (16), R (11)                                                         |
+|                               | Application domains of interest (checkbox question, 8 standard options plus a few write-ins)                                    |
+|                               | Areas of data science of interest (checkbox question, 11 options)                                                               |
 
 ## Questions of interest
 
@@ -145,6 +145,42 @@ round(prop.table(counts, margin = 2), 2)
 ```
 
 This table shows the percentage of students in the underestimate, aligned, and overestimate categories, based on which language they prefer. From the table, Python made up the largest share (42%) in the underestimate category, and students with no preferences made up most of the overestimate group (60%).
+
+hannah added:
+
+We also looked at whether taking a particular class had a significant influence on which project choices you picked. A heatmap was created to showcase the correlations between the classes taken and projects picked, where blue indicated a positive correlation, while red was a negative correlation.
+
+```{r}
+#| label: fig-heatmap
+#| fig-cap: "Correlation between project interests and classes taken"
+#| out-width: "100%"
+knitr::include_graphics("../results/proj_pref.png")
+
+```
+
+To observe if there were any correlation between the two groups, we summed the squared correlations between each class-project pair, and ran a permutation test with 5000 shuffles. From this experiment, we obtained a p-value of 0.3537, so we fail to reject the null hypothesis. This indicates that there is no significant association between the two groups. From the table below, we got that some pairs had smaller p-values individually after running around 468 tests. This means some p-values were by chance, so after adjusting for multiple tests using the Benjamini-Hochberg method, none of the pairs were significant.
+
+```{r}
+proj_interest <- processed[, 31:56]
+classes_taken <- processed[, 13:30]
+
+res <- expand.grid(x = names(proj_interest), y = names(classes_taken),
+                   stringsAsFactors = FALSE)
+
+res$p <- mapply(function(x, y) {
+  tab <- table(factor(proj_interest[[x]], levels = c(0, 1)),
+               factor(classes_taken[[y]], levels = c(0, 1)))
+  fisher.test(tab)$p.value
+}, res$x, res$y)
+
+res$p_adj <- p.adjust(res$p, method = "BH")
+res <- res[order(res$p), ]
+
+top <- head(res, 10)
+top[, c("p", "p_adj")] <- round(top[, c("p", "p_adj")], 3)
+rownames(top) <- NULL
+top
+```
 
 ## Useful tips (remove this section)
 

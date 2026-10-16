@@ -177,3 +177,20 @@ perm <- replicate(B, {
 hist(perm); abline(v = obs, col = "red")
 
 # p-value: 0.3537293
+
+res <- expand.grid(x = names(proj_interest), y = names(classes_taken),
+                   stringsAsFactors = FALSE)
+
+res$p <- mapply(function(x, y) {
+  tab <- table(factor(proj_interest[[x]], levels = c(0, 1)),
+               factor(classes_taken[[y]], levels = c(0, 1)))
+  fisher.test(tab)$p.value
+}, res$x, res$y)
+
+res$p_adj <- p.adjust(res$p, method = "BH")
+res <- res[order(res$p), ]
+
+top <- head(res, 10)
+top[, c("p", "p_adj")] <- round(top[, c("p", "p_adj")], 3)
+rownames(top) <- NULL
+top
