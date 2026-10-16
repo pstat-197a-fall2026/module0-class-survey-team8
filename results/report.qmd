@@ -42,7 +42,7 @@ The class is mostly seniors (49 of 55, 89%), with 5 juniors and 1 junior with se
 We also used outside data from the 2025-26 UCSB campus profile (budgetandplanning.ucsb.edu), which reports raw counts of students by gender and ethnicity. It covers 21,509 undergraduates school-wide and 1,693 undergraduates in the Data Science major. We used these counts as a reference to test whether the gender and ethnicity makeup of our class differs from the major and from the school as a whole.
 
 | Section | Measurements |
-|----|----|
+|------------------------------------|------------------------------------|
 | Background (51 people) | Self-rated proficiency in programming, math, and stats (beginner, intermediate, advanced, relative to a typical UCSB undergrad) |
 |  | Comfort level in each of those three areas (1 to 5 scale) |
 |  | Number of upper-division courses (3-5, 6-8, 9+) and which courses they completed |
@@ -69,6 +69,70 @@ Notice that the questions are precise but not overly technical.
 ## Findings
 
 Summarize your results. Don't try to explain every step you took; focus instead on providing the main data analytic outputs -- tables and figures -- and explaining clearly what they show. Clarify any important decisions you made in obtaining them. You can display codes if you like but it is not necessary.
+
+adrian added:
+
+### How does a student's preferences/experience impact their project choices?
+
+One thing we did is we looked at whether a student's preferred programming language (Python, R, or no preference) relates to their domain interests and self-rated comfort. We used the 49 students who answered both survey sections (22 Python, 16 no preference, 11 R) and left out the 7 domains that only one student picked.
+
+```{r}
+processed <- read_csv("../data/background_interest_processed.csv")
+
+domains <- names(processed)[31:45]
+counts <- colSums(processed[domains])
+keep <- names(counts[counts > 1])
+processed$n_domains <- rowSums(processed[keep])
+```
+
+**Domain choices do not clearly differ by language.** Python is the most common preference in almost every domain, but it is also 45% of the class, so that alone is not a pattern.
+
+```{r}
+#| fig-width: 7
+#| fig-height: 4
+#| fig-cap: "Preferred language among students who picked each domain"
+processed %>%
+  pivot_longer(all_of(keep), names_to = "domain", values_to = "picked") %>%
+  filter(picked == 1) %>%
+  count(domain, language) %>%
+  group_by(domain) %>%
+  mutate(total = sum(n), pct = 100 * n / total) %>%
+  ggplot(aes(reorder(domain, total), pct, fill = language)) +
+  geom_col() +
+  coord_flip() +
+  labs(x = NULL, y = "% of students who picked the domain", fill = "Language")
+```
+
+**Students with no language preference picked more domains.** They picked about 5 on average, compared to about 3.7 for Python and 3.3 for R (p = 0.012). The gap was clear against R (adjusted p = 0.017) and weaker against Python (adjusted p = 0.049). One possible reason is broader interests, but our data cannot say why.
+
+```{r}
+#| fig-width: 5
+#| fig-height: 3.5
+#| fig-cap: "Number of domains picked, by preferred language"
+ggplot(processed, aes(language, n_domains)) +
+  geom_boxplot() +
+  labs(x = NULL, y = "Number of domains picked")
+```
+
+**Comfort ratings were slightly higher for Python students, but not significantly.** The table shows group averages (comfort is rated 1 to 5) and Kruskal-Wallis p-values.
+
+```{r}
+vars <- c(Programming = "prog.comf", Math = "math.comf",
+          Stats = "stat.comf", `Domains picked` = "n_domains")
+
+map_dfr(vars, function(v) {
+  m <- tapply(processed[[v]], processed$language, mean)
+  tibble(Python = as.numeric(m["Python"]),
+         R = as.numeric(m["R"]),
+         `No preference` = as.numeric(m["No preference"]),
+         `p-value` = kruskal.test(processed[[v]] ~ processed$language)$p.value)
+}, .id = "Measure") %>%
+  mutate(across(Python:`No preference`, ~ round(.x, 2)),
+         `p-value` = round(`p-value`, 3)) %>%
+  knitr::kable(caption = "Group averages and tests by preferred language")
+```
+
+Only the number of domains picked is significant. The comfort differences may be real trends, but with 49 students from one class (and several tests run), we cannot tell them apart from chance.
 
 ## Useful tips (remove this section)
 
