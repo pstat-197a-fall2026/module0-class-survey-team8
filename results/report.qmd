@@ -40,6 +40,7 @@ The class is mostly seniors (49 of 55, 89%), with 5 juniors and 1 junior with se
 
 We also used outside data from the 2025-26 UCSB campus profile (bap.ucsb.edu), which reports raw counts of students by gender and ethnicity. It covers 21,509 undergraduates school-wide and 1,693 undergraduates in the Data Science major. We used these counts as a reference to test whether the gender and ethnicity makeup of our class differs from the major and from the school as a whole.
 
+<<<<<<< HEAD
 +---------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
 | Background                      | Measurements                                                                                                                    |
 |                                 |                                                                                                                                 |
@@ -67,6 +68,31 @@ We also used outside data from the 2025-26 UCSB campus profile (bap.ucsb.edu), w
 +-------------------+----------------------------------------------------------------------------------------------+
 | areas             | Areas of data science of interest (checkbox question, 11 options)                            |
 +-------------------+----------------------------------------------------------------------------------------------+
+=======
+<<<<<<< HEAD
+| Section | Measurements |
+|------------------------------------|------------------------------------|
+| Background (51 people) | Self-rated proficiency in programming, math, and stats (beginner, intermediate, advanced, relative to a typical UCSB undergrad) |
+|  | Comfort level in each of those three areas (1 to 5 scale) |
+|  | Number of upper-division courses (3-5, 6-8, 9+) and which courses they completed |
+|  | Whether they have a domain specialization, and whether they have research experience (yes, no, unsure) |
+| Project interests (49 people) | Preferred project type: industry (32), research lab (6), no preference (11) |
+|  | Preferred programming language: Python (22), no preference (16), R (11) |
+|  | Application domains of interest (checkbox question, 8 standard options plus a few write-ins) |
+|  | Areas of data science of interest (checkbox question, 11 options) |
+=======
+| Section                       | Measurements                                                                                                                    |
+|------------------------------------|------------------------------------|
+| Background (51 people)        | Self-rated proficiency in programming, math, and stats (beginner, intermediate, advanced, relative to a typical UCSB undergrad) |
+|                               | Comfort level in each of those three areas (1 to 5 scale)                                                                       |
+|                               | Number of upper-division courses (3-5, 6-8, 9+) and which courses they completed                                                |
+|                               | Whether they have a domain specialization, and whether they have research experience (yes, no, unsure)                          |
+| Project interests (49 people) | Preferred project type: industry (32), research lab (6), no preference (11)                                                     |
+|                               | Preferred programming language: Python (22), no preference (16), R (11)                                                         |
+|                               | Application domains of interest (checkbox question, 8 standard options plus a few write-ins)                                    |
+|                               | Areas of data science of interest (checkbox question, 11 options)                                                               |
+>>>>>>> 4537aee3794721218056700fed31bdc170a74c0c
+>>>>>>> 8b8a0526608759a3e42343867a050665016f1e97
 
 ## Questions of interest
 
