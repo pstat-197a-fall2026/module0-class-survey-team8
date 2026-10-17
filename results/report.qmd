@@ -30,11 +30,11 @@ class_gen <- read_csv('demographics/Sheet 6-class gender.csv')
 
 ## Executive summary
 
-Our group was interested in analyzing how students' recorded experiences and interests relate to their project choices and language preferences. We were interested in comparing the demographic information from the survey to the general Statistics and Data Science major and undergraduate university level. Our final analysis asked whether the distribution of survey response times was significant, and if there was a possible association with class days. We found that the correlation between project preference and coursework taken was insignificant, and that differences in Python or R preference was not significantly explained by domain or area interests. However, students with no coding language preference picked more domain interests on average, with those of no language preference selecting 5 options, while Python chose 3.7, and R 3.3. The demographic analysis revealed significant differences in ethnic composition of class respondents compared with the major and undergraduate student population, although gender was insignificant. Another thing we looked at was the survey response timing. In particular, we were interested in whether there was a significant difference between responses completed on class days versus non class days. To test this, we performed a permutation test. Since our hypothesis was formed from looking at the data, we cannot conclude the test based on a significance level, but the results suggest class days may have been associated with more surveys completed.
+Our group was interested in analyzing how students' recorded experiences and interests relate to their project choices and language preferences. We were interested in comparing the demographic information from the survey to the general Statistics and Data Science major and undergraduate university level. Our final analysis asked whether the distribution of survey response times was significant, and if there was a possible association with class days. We found that the correlation between project preference and coursework taken was insignificant, and that differences in Python or R preference was not significantly explained by domain or area interests. However, students with no coding language preference picked more domain interests on average, with those of no language preference selecting 5 options, while Python chose 3.7, and R 3.3. The demographic analysis revealed significant differences in ethnic composition of class respondents compared with the major and undergraduate student population, although gender was insignificant. Another topic we analyzed was the survey response timing. In particular, we were interested in whether there was a significant difference between responses completed on class days versus non class days. Since our hypothesis was formed from looking at the data, we cannot conclude the test based on a significance level, but the results suggest class days may have been associated with more surveys completed.
 
 ## Data description
 
-The data come from a survey given to students in our class (PSTAT 197A) in fall 2026. There were 55 responses, submitted between September 23 and October 5, with a deadline of October 4 (54 on time, 1 late). The survey had two parts, a skills and background section and a project interests section, and students could consent to each part separately. 51 consented to the background part, 49 to the interests part, and 49 to both. Our analysis uses the 49 who did both, since the 2 who only did the background part drop out when the two files are merged. Each respondent has an artificial ID, so the two parts can be joined without identifying anyone.
+The data comes from a survey given to students in our class (PSTAT 197A) in fall 2026. There were 55 responses, submitted between September 23 and October 5, with a deadline of October 4 (54 on time, 1 late). The survey had two parts, a skills and background section, as well as a project interests section, and students could consent to each part separately. 51 consented to sharing their responses to the background section, 49 to the interests section, and 49 to both. Our analysis uses the 49 who consented to sharing both, since the 2 who only consented to the background section were dropped when the two files merged. Each respondent has an artificial ID, so the two parts can be joined without identifying anyone.
 
 The class is mostly seniors (49 of 55, 89%), with 5 juniors and 1 junior with senior credits. Nearly everyone is a Statistics and Data Science major (52 of 55, 95%), and about a third report a second major (Economics, Mathematics, and Applied Mathematics are the most common). The class is 55% male and 42% female, and 67% identify as Asian.
 
@@ -82,7 +82,7 @@ Through our group's collaboration, we were interested in identifying a relations
 
 ### 1. How does a student's preferences/experience impact their project choices?
 
-One thing we did is we looked at whether a student's preferred programming language (Python, R, or no preference) relates to their domain interests and self-rated comfort. We used the 49 students who answered both survey sections (22 Python, 16 no preference, 11 R) and left out the 7 domains that only one student picked.
+One thing we did is we looked at whether a student's preferred programming language (Python, R, or no preference) relates to their domain interests and self-rated comfort. From the 49 students who answered both survey sections, 22 preferred Python, 11 preferred R, and 16 had no preference. We also excluded the 7 domains that only one student picked.
 
 ```{r}
 processed <- read_csv("../data/background_interest_processed.csv")
@@ -153,15 +153,15 @@ counts <- table(processed$language, label(processed$prog.gap))
 counts
 ```
 
-Of all students, most students' stated proficiency were aligned with their comfort in coding. Only 1 students under-estimated (less comfortable than their proficiency suggests) and 5 over-estimated.
+Of all students, most students' stated proficiency were aligned with their comfort in coding. Only 1 student under-estimated (less comfortable than their proficiency suggests) and 5 over-estimated.
 
 ```{r}
 round(prop.table(counts, margin = 2), 2)
 ```
 
-This table shows the percentage of students in the underestimate, aligned, and overestimate categories, based on which language they prefer. From the table, a student who preferred R was the only one in the underestimate category, and students with no preferences made up most of the overestimate group (60%).
+This table shows the percentage of students in the underestimate, aligned, and overestimate categories, based on which language they prefer. From the table, a student who preferred R was the only one in the underestimate group, and students with no preferences made up most of the overestimate group (60%).
 
-We also looked at whether taking a particular class had a significant influence on which project choices you picked. A heat map was created to showcase the correlations between the classes taken and projects picked, where blue indicated a positive correlation, while red was a negative correlation.
+We also looked at whether taking a particular class had a significant influence on which project choices you picked. A heat map was created to showcase the correlations between the classes taken and projects picked, where blue indicated a positive correlation and red was a negative correlation.
 
 ```{r}
 #| label: fig-heatmap
@@ -171,7 +171,7 @@ knitr::include_graphics("../results/proj_pref.png")
 
 ```
 
-To observe if there were any correlation between the two groups, we summed the squared correlations between each class-project pair, and ran a permutation test with 5000 shuffles. From this experiment, we obtained a p-value of 0.3537, so we fail to reject the null hypothesis. This indicates that there is no significant association between the two groups. From the table below, we got that some pairs had smaller p-values individually after running around 468 tests. This means some p-values were by chance, so after adjusting for multiple tests using the Benjamini-Hochberg method, none of the pairs were significant.
+To observe if there were any correlation between the two groups, we summed the squared correlations between each class-project pair, and ran a permutation test with 5000 shuffles. From this experiment, we obtained a p-value of 0.3537, so we failed to reject the null hypothesis. This indicates that there is no significant association between the two groups. From the table below, we found that some pairs had smaller p-values individually after running around 468 tests. This means some p-values were by chance, so after adjusting for multiple tests using the Benjamini-Hochberg method, none of the pairs found to be significant.
 
 ```{r}
 proj_interest <- processed[, 31:56]
@@ -192,7 +192,8 @@ res <- res[order(res$p), ]
 top <- head(res, 10)
 top[, c("p", "p_adj")] <- round(top[, c("p", "p_adj")], 3)
 rownames(top) <- NULL
-top
+names(top) <- c("Project interest", "Class", "p-value", "Adjusted p")
+knitr::kable(top, row.names = FALSE)
 ```
 
 ### 2. How does our class demographic data compare to the school and the data science major as a whole?
@@ -279,11 +280,11 @@ As you can see in the chart below, the class days were 9/24, 9/29, and 10/1.
 
 To test whether there was a significant difference in surveys completed on class vs non class days we performed a permutation test.
 
-- Null hypothesis: number of surveys completed on a given day is independent of whether the day is a class day - Alternative hypothesis: the day being a class day is positively associated with number of surveys completed
-- Test statistic: mean completion on class days - mean completion on non-class days
-- Null distribution: test statistic computed for every possible assignment of the 3 class-day labels to the 13 days (13 choose 3)
-- P-value: how often is this test-statistic larger than or equal to the observed result
+-   Null hypothesis: number of surveys completed on a given day is independent of whether the day is a class day - Alternative hypothesis: the day being a class day is positively associated with number of surveys completed
+-   Test statistic: mean completion on class days - mean completion on non-class days
+-   Null distribution: test statistic computed for every possible assignment of the 3 class-day labels to the 13 days (13 choose 3)
+-   P-value: how often is this test-statistic larger than or equal to the observed result
 
 ![Histogram of test statistic permutation null distribution + observed test statistic and p-value](response_timing_permutation_null_distribution.png)
 
-As you can see the p-value is quite low, suggesting there is a positive association between survey completed and being a class day. However, since our hypothesis was formed from looking at the data, this p-value likely overstates the significance of the results and cannot be used to conclusively decide the hypothesis test.
+As you can see the p-value is quite low, suggesting that there is a positive association between survey completed and being a class day. However, since our hypothesis was formed from looking at the data, this p-value likely overstates the significance of the results and cannot be used to conclusively decide the hypothesis test.

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,9 +11,6 @@
 
 <title>Analysis of class surveys</title>
 <style>
-/* Default styles provided by pandoc.
-** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -29,21 +26,20 @@ ul.task-list li input[type="checkbox"] {
 
 
 <script src="report_files/libs/clipboard/clipboard.min.js"></script>
-<script src="report_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="report_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="report_files/libs/quarto-html/quarto.js"></script>
 <script src="report_files/libs/quarto-html/popper.min.js"></script>
 <script src="report_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="report_files/libs/quarto-html/anchor.min.js"></script>
 <link href="report_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="report_files/libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="report_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="report_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="report_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="report_files/libs/bootstrap/bootstrap-1147068d11d29de8512d9ff18a5d93b5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="report_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="fullcontent">
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 
@@ -77,21 +73,19 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
-
 </header>
-
 
 <section id="executive-summary" class="level2">
 <h2 class="anchored" data-anchor-id="executive-summary">Executive summary</h2>
-<p>Our group was interested in analyzing how students’ recorded experiences and interests relate to their project choices and language preferences. We were interested in comparing the demographic information from the survey to the general Statistics and Data Science major and undergraduate university level. Our final analysis asked whether the distribution of survey response times was significant, and if there was a possible association with class days. We found that the correlation between project preference and coursework taken was insignificant, and that differences in Python or R preference was not significantly explained by domain or area interests. However, students with no coding language preference picked more domain interests on average, with those of no language preference selecting 5 options, while Python chose 3.7, and R 3.3. The demographic analysis revealed significant differences in ethnic composition of class respondents compared with the major and undergraduate student population, although gender was insignificant. Another thing we looked at was the survey response timing. In particular, we were interested in whether there was a significant difference between responses completed on class days versus non class days. To test this, we performed a permutation test. Since our hypothesis was formed from looking at the data, we cannot conclude the test based on a significance level, but the results suggest class days may have been associated with more surveys completed.</p>
+<p>Our group was interested in analyzing how students’ recorded experiences and interests relate to their project choices and language preferences. We were interested in comparing the demographic information from the survey to the general Statistics and Data Science major and undergraduate university level. Our final analysis asked whether the distribution of survey response times was significant, and if there was a possible association with class days. We found that the correlation between project preference and coursework taken was insignificant, and that differences in Python or R preference was not significantly explained by domain or area interests. However, students with no coding language preference picked more domain interests on average, with those of no language preference selecting 5 options, while Python chose 3.7, and R 3.3. The demographic analysis revealed significant differences in ethnic composition of class respondents compared with the major and undergraduate student population, although gender was insignificant. Another topic we analyzed was the survey response timing. In particular, we were interested in whether there was a significant difference between responses completed on class days versus non class days. Since our hypothesis was formed from looking at the data, we cannot conclude the test based on a significance level, but the results suggest class days may have been associated with more surveys completed.</p>
 </section>
 <section id="data-description" class="level2">
 <h2 class="anchored" data-anchor-id="data-description">Data description</h2>
-<p>The data come from a survey given to students in our class (PSTAT 197A) in fall 2026. There were 55 responses, submitted between September 23 and October 5, with a deadline of October 4 (54 on time, 1 late). The survey had two parts, a skills and background section and a project interests section, and students could consent to each part separately. 51 consented to the background part, 49 to the interests part, and 49 to both. Our analysis uses the 49 who did both, since the 2 who only did the background part drop out when the two files are merged. Each respondent has an artificial ID, so the two parts can be joined without identifying anyone.</p>
+<p>The data comes from a survey given to students in our class (PSTAT 197A) in fall 2026. There were 55 responses, submitted between September 23 and October 5, with a deadline of October 4 (54 on time, 1 late). The survey had two parts, a skills and background section, as well as a project interests section, and students could consent to each part separately. 51 consented to sharing their responses to the background section, 49 to the interests section, and 49 to both. Our analysis uses the 49 who consented to sharing both, since the 2 who only consented to the background section were dropped when the two files merged. Each respondent has an artificial ID, so the two parts can be joined without identifying anyone.</p>
 <p>The class is mostly seniors (49 of 55, 89%), with 5 juniors and 1 junior with senior credits. Nearly everyone is a Statistics and Data Science major (52 of 55, 95%), and about a third report a second major (Economics, Mathematics, and Applied Mathematics are the most common). The class is 55% male and 42% female, and 67% identify as Asian.</p>
 <p>We also used outside data from the 2025-26 UCSB campus profile (bap.ucsb.edu), which reports raw counts of students by gender and ethnicity. It covers 21,509 undergraduates school-wide and 1,693 undergraduates in the Data Science major. We used these counts as a reference to test whether the gender and ethnicity makeup of our class differs from the major and from the school as a whole.</p>
 <p>Finally, there was data on how many students completed the survey each day for the 2 weeks between assignment and deadline.</p>
-<table class="caption-top table">
+<table class="table">
 <colgroup>
 <col style="width: 30%">
 <col style="width: 70%">
@@ -122,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<table class="caption-top table">
+<table class="table">
 <colgroup>
 <col style="width: 30%">
 <col style="width: 70%">
@@ -167,33 +161,33 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="findings">Findings</h2>
 <section id="how-does-a-students-preferencesexperience-impact-their-project-choices" class="level3">
 <h3 class="anchored" data-anchor-id="how-does-a-students-preferencesexperience-impact-their-project-choices">1. How does a student’s preferences/experience impact their project choices?</h3>
-<p>One thing we did is we looked at whether a student’s preferred programming language (Python, R, or no preference) relates to their domain interests and self-rated comfort. We used the 49 students who answered both survey sections (22 Python, 16 no preference, 11 R) and left out the 7 domains that only one student picked.</p>
+<p>One thing we did is we looked at whether a student’s preferred programming language (Python, R, or no preference) relates to their domain interests and self-rated comfort. From the 49 students who answered both survey sections, 22 preferred Python, 11 preferred R, and 16 had no preference. We also excluded the 7 domains that only one student picked.</p>
 <p><strong>Domain choices do not clearly differ by language.</strong> Python is the most common preference in almost every domain, but it is also 45% of the class, so that alone is not a pattern.</p>
-<div class="cell">
+<div class="cell" data-hash="report_cache/html/unnamed-chunk-3_10b29011710962b317f7d2494e0a3f4b">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="report_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Preferred language among students who picked each domain</figcaption>
+<figcaption class="figure-caption">Preferred language among students who picked each domain</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p><strong>Students with no language preference picked more domains.</strong> They picked about 5 on average, compared to about 3.7 for Python and 3.3 for R (p = 0.012). The gap was clear against R (adjusted p = 0.017) and weaker against Python (adjusted p = 0.049). One possible reason is broader interests, but our data cannot say why.</p>
-<div class="cell">
+<div class="cell" data-hash="report_cache/html/unnamed-chunk-4_a44346180ceeebe01db8075cf26b6d1e">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="report_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="480"></p>
-<figcaption>Number of domains picked, by preferred language</figcaption>
+<figcaption class="figure-caption">Number of domains picked, by preferred language</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p><strong>Comfort ratings were slightly higher for Python students, but not significantly.</strong> The table shows group averages (comfort is rated 1 to 5) and Kruskal-Wallis p-values.</p>
-<div class="cell">
+<div class="cell" data-hash="report_cache/html/unnamed-chunk-5_bf90a9b9d75ea140de80919b4a874a6a">
 <div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
+<table class="table table-sm table-striped small">
 <caption>Group averages and tests by preferred language</caption>
 <colgroup>
 <col style="width: 10%">
@@ -246,7 +240,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>Only the number of domains picked is significant. The comfort differences may be real trends, but with 49 students from one class (and several tests run), we cannot tell them apart from chance.</p>
 <p>Proficiency is the skill level students stated they have: beginner, intermediate, or advanced compared to an average UCSB student, and comfort is how students feel when coding, rated on a scale from 1 to 5.</p>
-<div class="cell">
+<div class="cell" data-hash="report_cache/html/unnamed-chunk-6_a0751fa5aadf2ca70a9474a171f8d1c2">
 <div class="cell-output cell-output-stdout">
 <pre><code>               
                 Aligned Over Under
@@ -255,8 +249,8 @@ ul.task-list li input[type="checkbox"] {
   R                   9    1     1</code></pre>
 </div>
 </div>
-<p>Of all students, most students’ stated proficiency were aligned with their comfort in coding. Only 1 students under-estimated (less comfortable than their proficiency suggests) and 5 over-estimated.</p>
-<div class="cell">
+<p>Of all students, most students’ stated proficiency were aligned with their comfort in coding. Only 1 student under-estimated (less comfortable than their proficiency suggests) and 5 over-estimated.</p>
+<div class="cell" data-hash="report_cache/html/unnamed-chunk-7_b4e215651b280b47ba4e2873a52fdf80">
 <div class="cell-output cell-output-stdout">
 <pre><code>               
                 Aligned Over Under
@@ -265,43 +259,106 @@ ul.task-list li input[type="checkbox"] {
   R                0.21 0.20  1.00</code></pre>
 </div>
 </div>
-<p>This table shows the percentage of students in the underestimate, aligned, and overestimate categories, based on which language they prefer. From the table, a student who preferred R was the only one in the underestimate category, and students with no preferences made up most of the overestimate group (60%).</p>
-<p>We also looked at whether taking a particular class had a significant influence on which project choices you picked. A heat map was created to showcase the correlations between the classes taken and projects picked, where blue indicated a positive correlation, while red was a negative correlation.</p>
-<div class="cell">
+<p>This table shows the percentage of students in the underestimate, aligned, and overestimate categories, based on which language they prefer. From the table, a student who preferred R was the only one in the underestimate group, and students with no preferences made up most of the overestimate group (60%).</p>
+<p>We also looked at whether taking a particular class had a significant influence on which project choices you picked. A heat map was created to showcase the correlations between the classes taken and projects picked, where blue indicated a positive correlation and red was a negative correlation.</p>
+<div class="cell" data-hash="report_cache/html/fig-heatmap_6614c0bfb220e070a589a92bd12ac873">
 <div class="cell-output-display">
-<div id="fig-heatmap" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../results/proj_pref.png" class="img-fluid figure-img" style="width:100.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Correlation between project interests and classes taken
-</figcaption>
+<div id="fig-heatmap" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../results/proj_pref.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Correlation between project interests and classes taken</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>To observe if there were any correlation between the two groups, we summed the squared correlations between each class-project pair, and ran a permutation test with 5000 shuffles. From this experiment, we obtained a p-value of 0.3537, so we fail to reject the null hypothesis. This indicates that there is no significant association between the two groups. From the table below, we got that some pairs had smaller p-values individually after running around 468 tests. This means some p-values were by chance, so after adjusting for multiple tests using the Benjamini-Hochberg method, none of the pairs were significant.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>                                               x         y     p p_adj
-1                                  Public health PSTAT 175 0.010     1
-2               Data acquisition and engineering PSTAT 160 0.017     1
-3           Analysis or classification of images PSTAT 175 0.027     1
-4                                             AI  LING 110 0.041     1
-5              Deep learning and neural networks PSTAT 122 0.044     1
-6     Spatial statistics or time series analysis PSTAT 122 0.049     1
-7                                  Public health      CS 5 0.050     1
-8              Deep learning and neural networks PSTAT 131 0.051     1
-9                    Social or political science PSTAT 122 0.060     1
-10 Data visualization and interactive dashboards PSTAT 127 0.062     1</code></pre>
+<p>To observe if there were any correlation between the two groups, we summed the squared correlations between each class-project pair, and ran a permutation test with 5000 shuffles. From this experiment, we obtained a p-value of 0.3537, so we failed to reject the null hypothesis. This indicates that there is no significant association between the two groups. From the table below, we found that some pairs had smaller p-values individually after running around 468 tests. This means some p-values were by chance, so after adjusting for multiple tests using the Benjamini-Hochberg method, none of the pairs found to be significant.</p>
+<div class="cell" data-hash="report_cache/html/unnamed-chunk-8_3d49be88a99bf37a4b049c6fd43d2659">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 28%">
+<col style="width: 28%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Project interest</th>
+<th style="text-align: left;">Class</th>
+<th style="text-align: right;">p-value</th>
+<th style="text-align: right;">Adjusted p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Public health</td>
+<td style="text-align: left;">PSTAT 175</td>
+<td style="text-align: right;">0.010</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Data acquisition and engineering</td>
+<td style="text-align: left;">PSTAT 160</td>
+<td style="text-align: right;">0.017</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Analysis or classification of images</td>
+<td style="text-align: left;">PSTAT 175</td>
+<td style="text-align: right;">0.027</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AI</td>
+<td style="text-align: left;">LING 110</td>
+<td style="text-align: right;">0.041</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Deep learning and neural networks</td>
+<td style="text-align: left;">PSTAT 122</td>
+<td style="text-align: right;">0.044</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Spatial statistics or time series analysis</td>
+<td style="text-align: left;">PSTAT 122</td>
+<td style="text-align: right;">0.049</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Public health</td>
+<td style="text-align: left;">CS 5</td>
+<td style="text-align: right;">0.050</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Deep learning and neural networks</td>
+<td style="text-align: left;">PSTAT 131</td>
+<td style="text-align: right;">0.051</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Social or political science</td>
+<td style="text-align: left;">PSTAT 122</td>
+<td style="text-align: right;">0.060</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Data visualization and interactive dashboards</td>
+<td style="text-align: left;">PSTAT 127</td>
+<td style="text-align: right;">0.062</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </section>
 <section id="how-does-our-class-demographic-data-compare-to-the-school-and-the-data-science-major-as-a-whole" class="level3">
 <h3 class="anchored" data-anchor-id="how-does-our-class-demographic-data-compare-to-the-school-and-the-data-science-major-as-a-whole">2. How does our class demographic data compare to the school and the data science major as a whole?</h3>
 <p>Additionally, we utilized ethnicity and gender data to compare the demographic composition of our class with that of the overall UCSB undergraduate population and undergraduate students in the Statistics and Probability department. We obtained ethnicity data (White/Other, Asian, and URM) and gender data (Man/Trans Man, Woman/Trans Woman, and Other/Unknown) from the UCSB Office of Budget and Planning enrollment dashboard. One limitation of the data set was that international students did not have their ethnicity or country of origin specified, so we excluded these students from our ethnicity comparisons. The counts were compiled into separate CSV files and analyzed using Pearson’s chi-square test to determine whether the observed differences in demographic distributions were statistically significant.</p>
-<div class="cell">
+<div class="cell" data-hash="report_cache/html/unnamed-chunk-9_7f98532c21ca2227aad07d5b393cc209">
 <div class="cell-output cell-output-stdout">
 <pre><code>
  class_vs_school_ethnicity 
@@ -350,7 +407,7 @@ data:  contingency_table
 X-squared = 1.873, df = NA, p-value = 0.341</code></pre>
 </div>
 <div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
+<table class="table table-sm table-striped small">
 <caption>Demographic comparison of class enrollment with school and DS populations</caption>
 <colgroup>
 <col style="width: 13%">
@@ -403,7 +460,7 @@ X-squared = 1.873, df = NA, p-value = 0.341</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="response_timing_bar_chart_class_day_color.png" class="img-fluid figure-img"></p>
-<figcaption>Bar chart of number of surveys completed each day, colored by class vs non class day</figcaption>
+<figcaption class="figure-caption">Bar chart of number of surveys completed each day, colored by class vs non class day</figcaption>
 </figure>
 </div>
 <p>To test whether there was a significant difference in surveys completed on class vs non class days we performed a permutation test.</p>
@@ -416,68 +473,53 @@ X-squared = 1.873, df = NA, p-value = 0.341</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="response_timing_permutation_null_distribution.png" class="img-fluid figure-img"></p>
-<figcaption>Histogram of test statistic permutation null distribution + observed test statistic and p-value</figcaption>
+<figcaption class="figure-caption">Histogram of test statistic permutation null distribution + observed test statistic and p-value</figcaption>
 </figure>
 </div>
-<p>As you can see the p-value is quite low, suggesting there is a positive association between survey completed and being a class day. However, since our hypothesis was formed from looking at the data, this p-value likely overstates the significance of the results and cannot be used to conclusively decide the hypothesis test.</p>
+<p>As you can see the p-value is quite low, suggesting that there is a positive association between survey completed and being a class day. However, since our hypothesis was formed from looking at the data, this p-value likely overstates the significance of the results and cannot be used to conclusively decide the hypothesis test.</p>
 </section>
 </section>
 
 </main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
-  window.document.addEventListener("DOMContentLoaded", function (event) {
-    const icon = "";
-    const anchorJS = new window.AnchorJS();
-    anchorJS.options = {
-      placement: 'right',
-      icon: icon
-    };
-    anchorJS.add('.anchored');
-    const isCodeAnnotation = (el) => {
-      for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {                     
-          return true;
-        }
-      }
-      return false;
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
     }
-    const onCopySuccess = function(e) {
-      // button target
-      const button = e.trigger;
-      // don't keep focus
-      button.blur();
-      // flash "checked"
-      button.classList.add('code-copy-button-checked');
-      var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
-      let tooltip;
-      if (window.bootstrap) {
-        button.setAttribute("data-bs-toggle", "tooltip");
-        button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
-        tooltip = new bootstrap.Tooltip(button, 
-          { trigger: "manual", 
-            customClass: "code-copy-button-tooltip",
-            offset: [0, -8]});
-        tooltip.show();    
-      }
-      setTimeout(function() {
-        if (tooltip) {
-          tooltip.hide();
-          button.removeAttribute("data-bs-title");
-          button.removeAttribute("data-bs-toggle");
-          button.removeAttribute("data-bs-placement");
-        }
-        button.setAttribute("title", currentTitle);
-        button.classList.remove('code-copy-button-checked');
-      }, 1000);
-      // clear code selection
-      e.clearSelection();
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
     }
-    const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
@@ -485,348 +527,195 @@ X-squared = 1.873, df = NA, p-value = 0.341</code></pre>
       }
       return codeEl.innerText;
     }
-    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-      text: getTextToCopy
-    });
-    clipboard.on('success', onCopySuccess);
-    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-        text: getTextToCopy,
-        container: window.document.getElementById('quarto-embedded-source-code-modal')
-      });
-      clipboardModal.on('success', onCopySuccess);
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
     }
-      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
-      var isInternal = (href) => {
-          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
       }
-      // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-      for (var i=0; i<links.length; i++) {
-        const link = links[i];
-        if (!isInternal(link.href)) {
-          // undo the damage that might have been done by quarto-nav.js in the case of
-          // links that we want to consider external
-          if (link.dataset.originalHref !== undefined) {
-            link.href = link.dataset.originalHref;
-          }
-        }
-      }
-    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-      const config = {
-        allowHTML: true,
-        maxWidth: 500,
-        delay: 100,
-        arrow: false,
-        appendTo: function(el) {
-            return el.parentElement;
-        },
-        interactive: true,
-        interactiveBorder: 10,
-        theme: 'quarto',
-        placement: 'bottom-start',
-      };
-      if (contentFn) {
-        config.content = contentFn;
-      }
-      if (onTriggerFn) {
-        config.onTrigger = onTriggerFn;
-      }
-      if (onUntriggerFn) {
-        config.onUntrigger = onUntriggerFn;
-      }
-      window.tippy(el, config); 
-    }
-    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-    for (var i=0; i<noterefs.length; i++) {
-      const ref = noterefs[i];
-      tippyHover(ref, function() {
-        // use id or data attribute instead here
-        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-        try { href = new URL(href).hash; } catch {}
-        const id = href.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note) {
-          return note.innerHTML;
-        } else {
-          return "";
-        }
-      });
-    }
-    const xrefs = window.document.querySelectorAll('a.quarto-xref');
-    const processXRef = (id, note) => {
-      // Strip column container classes
-      const stripColumnClz = (el) => {
-        el.classList.remove("page-full", "page-columns");
-        if (el.children) {
-          for (const child of el.children) {
-            stripColumnClz(child);
-          }
-        }
-      }
-      stripColumnClz(note)
-      if (id === null || id.startsWith('sec-')) {
-        // Special case sections, only their first couple elements
-        const container = document.createElement("div");
-        if (note.children && note.children.length > 2) {
-          container.appendChild(note.children[0].cloneNode(true));
-          for (let i = 1; i < note.children.length; i++) {
-            const child = note.children[i];
-            if (child.tagName === "P" && child.innerText === "") {
-              continue;
-            } else {
-              container.appendChild(child.cloneNode(true));
-              break;
-            }
-          }
-          if (window.Quarto?.typesetMath) {
-            window.Quarto.typesetMath(container);
-          }
-          return container.innerHTML
-        } else {
-          if (window.Quarto?.typesetMath) {
-            window.Quarto.typesetMath(note);
-          }
-          return note.innerHTML;
-        }
-      } else {
-        // Remove any anchor links if they are present
-        const anchorLink = note.querySelector('a.anchorjs-link');
-        if (anchorLink) {
-          anchorLink.remove();
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        if (note.classList.contains("callout")) {
-          return note.outerHTML;
-        } else {
-          return note.innerHTML;
-        }
-      }
-    }
-    for (var i=0; i<xrefs.length; i++) {
-      const xref = xrefs[i];
-      tippyHover(xref, undefined, function(instance) {
-        instance.disable();
-        let url = xref.getAttribute('href');
-        let hash = undefined; 
-        if (url.startsWith('#')) {
-          hash = url;
-        } else {
-          try { hash = new URL(url).hash; } catch {}
-        }
-        if (hash) {
-          const id = hash.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note !== null) {
-            try {
-              const html = processXRef(id, note.cloneNode(true));
-              instance.setContent(html);
-            } finally {
-              instance.enable();
-              instance.show();
-            }
-          } else {
-            // See if we can fetch this
-            fetch(url.split('#')[0])
-            .then(res => res.text())
-            .then(html => {
-              const parser = new DOMParser();
-              const htmlDoc = parser.parseFromString(html, "text/html");
-              const note = htmlDoc.getElementById(id);
-              if (note !== null) {
-                const html = processXRef(id, note);
-                instance.setContent(html);
-              } 
-            }).finally(() => {
-              instance.enable();
-              instance.show();
-            });
-          }
-        } else {
-          // See if we can fetch a full url (with no hash to target)
-          // This is a special case and we should probably do some content thinning / targeting
-          fetch(url)
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.querySelector('main.content');
-            if (note !== null) {
-              // This should only happen for chapter cross references
-              // (since there is no id in the URL)
-              // remove the first header
-              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-                note.children[0].remove();
-              }
-              const html = processXRef(null, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      }, function(instance) {
-      });
-    }
-        let selectedAnnoteEl;
-        const selectorForAnnotation = ( cell, annotation) => {
-          let cellAttr = 'data-code-cell="' + cell + '"';
-          let lineAttr = 'data-code-annotation="' +  annotation + '"';
-          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-          return selector;
-        }
-        const selectCodeLines = (annoteEl) => {
-          const doc = window.document;
-          const targetCell = annoteEl.getAttribute("data-target-cell");
-          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-          const lineIds = lines.map((line) => {
-            return targetCell + "-" + line;
-          })
-          let top = null;
-          let height = null;
-          let parent = null;
-          if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
-            }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
-            }
-            selectedAnnoteEl = annoteEl;
-          }
-        };
-        const unselectCodeLines = () => {
-          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-          elementsIds.forEach((elId) => {
-            const div = window.document.getElementById(elId);
-            if (div) {
-              div.remove();
-            }
-          });
-          selectedAnnoteEl = undefined;
-        };
-          // Handle positioning of the toggle
-      window.addEventListener(
-        "resize",
-        throttle(() => {
-          elRect = undefined;
-          if (selectedAnnoteEl) {
-            selectCodeLines(selectedAnnoteEl);
-          }
-        }, 10)
-      );
-      function throttle(fn, ms) {
-      let throttle = false;
-      let timer;
-        return (...args) => {
-          if(!throttle) { // first call gets through
-              fn.apply(this, args);
-              throttle = true;
-          } else { // all the others get throttled
-              if(timer) clearTimeout(timer); // cancel #2
-              timer = setTimeout(() => {
-                fn.apply(this, args);
-                timer = throttle = false;
-              }, ms);
-          }
-        };
-      }
-        // Attach click handler to the DT
-        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-        for (const annoteDlNode of annoteDls) {
-          annoteDlNode.addEventListener('click', (event) => {
-            const clickedEl = event.target;
-            if (clickedEl !== selectedAnnoteEl) {
-              unselectCodeLines();
-              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-              if (activeEl) {
-                activeEl.classList.remove('code-annotation-active');
-              }
-              selectCodeLines(clickedEl);
-              clickedEl.classList.add('code-annotation-active');
-            } else {
-              // Unselect the line
-              unselectCodeLines();
-              clickedEl.classList.remove('code-annotation-active');
-            }
-          });
-        }
-    const findCites = (el) => {
-      const parentEl = el.parentElement;
-      if (parentEl) {
-        const cites = parentEl.dataset.cites;
-        if (cites) {
-          return {
-            el,
-            cites: cites.split(' ')
-          };
-        } else {
-          return findCites(el.parentElement)
-        }
-      } else {
-        return undefined;
-      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
     };
-    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-    for (var i=0; i<bibliorefs.length; i++) {
-      const ref = bibliorefs[i];
-      const citeInfo = findCites(ref);
-      if (citeInfo) {
-        tippyHover(citeInfo.el, function() {
-          var popup = window.document.createElement('div');
-          citeInfo.cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            popup.appendChild(citeDiv);
-          });
-          return popup.innerHTML;
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
         });
       }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
     }
-  });
-  </script>
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
 </div> <!-- /content -->
-
 
 
 
