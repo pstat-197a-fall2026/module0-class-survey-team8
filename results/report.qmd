@@ -159,9 +159,9 @@ Of all students, most students' stated proficiency were aligned with their comfo
 round(prop.table(counts, margin = 2), 2)
 ```
 
-This table shows the percentage of students in the underestimate, aligned, and overestimate categories, based on which language they prefer. From the table, students who prefer using R made up the 1% share of the underestimate category, and students with no preferences made up most of the overestimate group (60%).
+This table shows the percentage of students in the underestimate, aligned, and overestimate categories, based on which language they prefer. From the table, a student who preferred R was the only one in the underestimate category, and students with no preferences made up most of the overestimate group (60%).
 
-We also looked at whether taking a particular class had a significant influence on which project choices you picked. A heatmap was created to showcase the correlations between the classes taken and projects picked, where blue indicated a positive correlation, while red was a negative correlation.
+We also looked at whether taking a particular class had a significant influence on which project choices you picked. A heat map was created to showcase the correlations between the classes taken and projects picked, where blue indicated a positive correlation, while red was a negative correlation.
 
 ```{r}
 #| label: fig-heatmap
